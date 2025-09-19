@@ -1,0 +1,4 @@
+#ifndef HW1_COMMAND_ICOMMAND_H_
+#define HW1_COMMAND_ICOMMAND_H_
+
+#endif
