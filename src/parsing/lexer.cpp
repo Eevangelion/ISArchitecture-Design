@@ -1,3 +1,3 @@
-#include "include/parsing/lexer.h"
+#include "parsing/lexer.h"
 
 class lexer;

@@ -1,3 +1,3 @@
-#include "include/command/pwd.h"
+#include "command/pwd.h"
 
 class pwd_command;

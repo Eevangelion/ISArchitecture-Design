@@ -1,4 +1,4 @@
-#include "src/controller.cpp"
+#include "controller.cpp"
 #include <stdio.h>
 
 
