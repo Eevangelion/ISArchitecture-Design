@@ -3,7 +3,7 @@
 
 
 int main() {
-    Controller* controller;
+    controller* controller;
 
     printf("Hello interpreter!\n");
     return 0;

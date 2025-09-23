@@ -1,3 +1,3 @@
 #include "include/command/wc.h"
 
-class WCCommand;
+class wc_command;

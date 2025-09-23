@@ -1,3 +1,3 @@
 #include "include/command/exit.h"
 
-class ExitCommand;
+class exit_command;

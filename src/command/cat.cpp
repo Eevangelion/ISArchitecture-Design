@@ -1,3 +1,3 @@
 #include "include/command/cat.h"
 
-class CatCommand;
+class cat_command;

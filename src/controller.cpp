@@ -1,3 +1,3 @@
 #include "include/controller.h"
 
-class Controller;
+class controller;

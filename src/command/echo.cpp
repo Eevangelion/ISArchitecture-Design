@@ -1,3 +1,3 @@
 #include "include/command/echo.h"
 
-class EchoCommand;
+class echo_command;
