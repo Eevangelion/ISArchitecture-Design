@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.14)
+project(SimpleInterpreter LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
+file(GLOB SRC_FILES src/*.cpp)
+add_library(my_lib ${SRC_FILES})
+
+include(FetchContent)
+FetchContent_Declare(
+    catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    GIT_TAG v3.6.0
+)
+FetchContent_MakeAvailable(catch2)
+
+file(GLOB_RECURSE TEST_FILES test/*.cpp)
+add_executable(tests ${TEST_FILES})
+
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+
+include(CTest)
+include(Catch)
+catch_discover_tests(tests)
