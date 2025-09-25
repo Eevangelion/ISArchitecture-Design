@@ -18,10 +18,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(catch2)
 
 file(GLOB_RECURSE TEST_FILES test/*.cpp)
-add_executable(tests ${TEST_FILES})
+add_executable(interpreter_tests ${TEST_FILES})
+add_executable(interpreter ${CMAKE_SOURCE_DIR}/src/main.cpp)
 
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(interpreter_tests PRIVATE Catch2::Catch2WithMain)
 
 include(CTest)
 include(Catch)
-catch_discover_tests(tests)
+catch_discover_tests(interpreter_tests)

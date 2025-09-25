@@ -32,6 +32,7 @@ git switch hw1-simple-interpreter
 
 ```bash
 cmake --build .
+./interpreter
 ```
 
 # Testing
