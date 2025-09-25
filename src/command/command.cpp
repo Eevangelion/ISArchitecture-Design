@@ -1,3 +1,3 @@
-#include "include/command/command.h"
+#include "command/command.h"
 
 class command;
