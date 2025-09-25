@@ -1,3 +1,3 @@
 #include "parsing/parser.h"
 
-class parser;
+parser::parser() {}
