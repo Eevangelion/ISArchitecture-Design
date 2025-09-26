@@ -1,3 +1,5 @@
 #include "command/pwd.h"
 
-class pwd_command;
+std::string pwd_command::process() {
+    return std::filesystem::current_path().string();
+}
