@@ -1,5 +1,7 @@
 #include "command/cat.h"
 
+cat_command::cat_command() {};
+
 std::string cat_command::process() {
     std::string result;
     for (std::string &path : this->arguments) {
@@ -9,4 +11,6 @@ std::string cat_command::process() {
         result += this->read_file(path);
     };
     return result;
-}
+};
+
+cat_command::~cat_command() {};
