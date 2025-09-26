@@ -9,7 +9,7 @@
 #include <filesystem>
 
 class command {
-private:
+protected:
     std::vector<std::string> arguments;
 
     std::string read_file(std::string&);
