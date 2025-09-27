@@ -2,7 +2,7 @@
 
 #include <filesystem>
 
-pwd_command_t::pwd_command_t() 
+pwd_command_t::pwd_command_t()
 {
 }
 

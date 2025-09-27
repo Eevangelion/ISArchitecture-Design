@@ -1,11 +1,10 @@
 #include "command/cat.h"
 
 #include <filesystem>
-#include <fstream>
-
 #include <stdexcept>
 
-cat_command_t::cat_command_t() 
+cat_command_t::cat_command_t(std::vector<std::string> const& arguments) 
+    : file_command_t(arguments)
 {
 }
 
@@ -16,19 +15,6 @@ cat_command_t::~cat_command_t()
 std::string cat_command_t::process() const
 {
     std::string result;
-
-    auto read_file = [](std::string const& path) -> std::string
-    {
-        std::ifstream in(path, std::ios::binary | std::ios::ate);
-        if (!in) 
-            return {};
-
-        std::string content;
-        content.reserve(in.tellg());
-        in.seekg(0);
-        content.assign(std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>());
-        return content;
-    };
 
     for (auto const& path : get_arguments()) 
     {

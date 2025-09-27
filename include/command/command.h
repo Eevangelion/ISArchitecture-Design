@@ -6,7 +6,7 @@
 class command_t 
 {
 public:
-    command_t();
+    command_t(std::vector<std::string> const& arguments = {});
     virtual ~command_t();
     
     void add_argument(std::string const& argument);

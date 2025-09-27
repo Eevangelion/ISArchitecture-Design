@@ -1,6 +1,6 @@
 #include "command/exit.h"
 
-exit_command_t::exit_command_t() 
+exit_command_t::exit_command_t()
 {
 }
 

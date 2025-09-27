@@ -2,8 +2,14 @@
 #include <filesystem>
 #include <stdexcept>
 
-wc_command_t::wc_command_t() {}
-wc_command_t::~wc_command_t() {}
+wc_command_t::wc_command_t(std::vector<std::string> const& arguments) 
+    : file_command_t(arguments)
+{
+}
+
+wc_command_t::~wc_command_t() 
+{
+}
 
 std::string wc_command_t::process() const {
     std::string result;

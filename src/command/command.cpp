@@ -1,6 +1,7 @@
 #include "command/command.h"
 
-command_t::command_t() 
+command_t::command_t(std::vector<std::string> const& arguments)
+    : arguments_(arguments)
 {
 }
 
