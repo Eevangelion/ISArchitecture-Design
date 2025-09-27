@@ -10,5 +10,5 @@ public:
     cat_command_t();
     ~cat_command_t();
 
-    std::string process() override;
+    std::string process() const override;
 };

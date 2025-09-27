@@ -10,5 +10,5 @@ public:
     exit_command_t();
     ~exit_command_t();
     
-    std::string process() override;
+    std::string process() const override;
 };

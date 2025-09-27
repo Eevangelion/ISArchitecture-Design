@@ -1,5 +1,7 @@
 #include "parsing/parser.h"
 
+#include "../include/command/cat.h"
+
 #include <iterator>
 #include <string>
 #include <iostream>
@@ -52,7 +54,7 @@ std::unique_ptr<command_t> parser_t::make_command(std::string const& name, std::
     if (name == "pwd")  test_command("pwd");
     if (name == "exit") test_command("exit");
 
-    return std::make_unique<command_t>();
+    return std::make_unique<cat_command_t>();
 
     // throw std::runtime_error("no such command implemented!");
 }

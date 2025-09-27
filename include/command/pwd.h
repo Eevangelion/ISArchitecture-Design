@@ -10,5 +10,5 @@ public:
     pwd_command_t();
     ~pwd_command_t();
 
-    std::string process() override;
+    std::string process() const override;
 };

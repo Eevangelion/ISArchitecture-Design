@@ -10,14 +10,10 @@ public:
     virtual ~command_t();
     
     void add_argument(std::string const& argument);
-    virtual std::string process() {}
+    virtual std::string process() const = 0;
 
 protected:
     std::vector<std::string> const& get_arguments() const;
-
-protected:
-    std::string read_file(std::string const& file_name);
-    bool is_file_exists(std::string const& file_name);
 
 private:
     std::vector<std::string> arguments_;
