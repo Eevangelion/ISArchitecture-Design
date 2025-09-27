@@ -1,6 +1,6 @@
 #include "parsing/parser.h"
 
-#include "../include/command/cat.h"
+#include "command/cat.h"
 
 #include <iterator>
 #include <string>
