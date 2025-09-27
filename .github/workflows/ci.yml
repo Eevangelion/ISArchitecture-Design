@@ -1,0 +1,17 @@
+name: build and test
+
+on: [push, pull_request]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+
+        - name: Build project
+          run: cmake --build .
+        
+        - name: Run tests
+          run: ctest -V .
+        
