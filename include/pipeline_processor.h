@@ -2,10 +2,6 @@
 
 #include "command/command.h"
 
-#include <string> 
-#include <vector>
-#include <memory>
-
 class pipeline_processor_t 
 {
 public:

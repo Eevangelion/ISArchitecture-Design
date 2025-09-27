@@ -15,7 +15,6 @@ cat_command_t::~cat_command_t()
 std::string cat_command_t::process() const
 {
     std::string result;
-
     for (auto const& path : get_arguments()) 
     {
         if (!std::filesystem::exists(path))
