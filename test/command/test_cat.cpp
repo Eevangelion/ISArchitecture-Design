@@ -1,4 +1,4 @@
-#include <command/cat.h>
+#include "command/cat.h"
 #include <vector>
 #include <catch2/catch_test_macros.hpp>
 
@@ -6,7 +6,7 @@ std::vector<std::string> filepaths = {"test/command/test_filedata/1.txt", "test/
 
 
 TEST_CASE("Reading single file from relative path"){
-    cat_command cmd;
+    cat_command_t cmd;
     cmd.add_argument(filepaths[0]);
 
     std::ifstream in(filepaths[0]);
@@ -18,7 +18,7 @@ TEST_CASE("Reading single file from relative path"){
 }
 
 TEST_CASE("Reading multiple files from relative path"){
-    cat_command cmd;
+    cat_command_t cmd;
     std::stringstream buf;
 
     for (std::string &path : filepaths){
@@ -35,7 +35,7 @@ TEST_CASE("Reading multiple files from relative path"){
 }
 
 TEST_CASE("Reading single file from absolute path"){
-    cat_command cmd;
+    cat_command_t cmd;
     std::string abs_path = std::filesystem::current_path().string() + '/' + filepaths[0];
     cmd.add_argument(abs_path);
 
@@ -48,7 +48,7 @@ TEST_CASE("Reading single file from absolute path"){
 }
 
 TEST_CASE("Reading multiple files from absolute path"){
-    cat_command cmd;
+    cat_command_t cmd;
     std::string abs_path;
     std::stringstream buf;
     for (std::string path : filepaths) {
@@ -65,7 +65,7 @@ TEST_CASE("Reading multiple files from absolute path"){
 }
 
 TEST_CASE("Reading from non-existent files"){
-    cat_command cmd;
+    cat_command_t cmd;
     cmd.add_argument("gibberish");
     REQUIRE_THROWS_AS(cmd.process(), std::runtime_error);
 }

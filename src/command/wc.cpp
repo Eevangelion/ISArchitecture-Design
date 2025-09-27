@@ -5,7 +5,7 @@
 wc_command_t::wc_command_t() {}
 wc_command_t::~wc_command_t() {}
 
-std::string wc_command_t::process() {
+std::string wc_command_t::process() const {
     std::string result;
     int lines_count = 0, words_count = 0, bytes_count = 0;
     bool words_start = false;

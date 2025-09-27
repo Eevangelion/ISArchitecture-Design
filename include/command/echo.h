@@ -3,13 +3,13 @@
 
 #include "command/command.h"
 
-class echo_command_t : command_t {
+class echo_command_t : public command_t {
 
 public:
     echo_command_t();
     ~echo_command_t();
     
-    std::string process() override;
+    std::string process() const override;
 };
 
 
