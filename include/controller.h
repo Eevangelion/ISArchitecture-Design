@@ -1,20 +1,19 @@
-#ifndef HW1_CONTROLLER_H_
-#define HW1_CONTROLLER_H_
+#pragma once
 
 #include "parsing/lexer.h"
 #include "parsing/parser.h"
 #include "pipeline_processor.h"
-#include <string>
 
-class controller {
-private:
-    lexer_t* lexer;
-    parser_t* parser;
-    pipeline_processor_t* pipeline_processor;
+class controller_t
+{
 public:
-    controller();
-    std::string process(std::string&);
-    ~controller() {}
-};
+    controller_t();
+    ~controller_t();
 
-#endif
+    std::string process(std::string const& argument);
+
+private:
+    std::unique_ptr<lexer_t> lexer_;
+    std::unique_ptr<parser_t> parser_;
+    std::unique_ptr<pipeline_processor_t> pipeline_processor_;
+};

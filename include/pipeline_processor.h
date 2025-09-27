@@ -1,15 +1,13 @@
-#ifndef HW1_PIPELINE_PROCESSOR_H_
-#define HW1_PIPELINE_PROCESSOR_H_
+#pragma once
+
+#include "command/command.h"
 
 #include <string> 
 #include <vector>
 #include <memory>
 
-#include "command/command.h"
-
-class pipeline_processor_t {
-
+class pipeline_processor_t 
+{
 public:
     std::string process_commands(std::vector<std::unique_ptr<command_t>> const& commands) {}
 };
-#endif

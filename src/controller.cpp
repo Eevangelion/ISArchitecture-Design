@@ -1,13 +1,19 @@
 #include "controller.h"
 
-controller::controller() {
-    this->lexer = new lexer_t;
-    this->parser = new parser_t;
-    this->pipeline_processor = new pipeline_processor_t;
+controller_t::controller_t() 
+    : lexer_(new lexer_t())
+    , parser_(new parser_t())
+    , pipeline_processor_(new pipeline_processor_t())
+{
 }
 
-std::string controller::process(std::string& input) {
-    auto tokens = this->lexer->tokenize(input);
-    auto cmds = this->parser->parse(tokens);
-    return this->pipeline_processor->process_commands(cmds);
+controller_t::~controller_t()
+{
+}
+
+std::string controller_t::process(std::string const& argument) 
+{
+    auto tokens = lexer_->tokenize(argument);
+    auto cmds = parser_->parse(tokens);
+    return pipeline_processor_->process_commands(cmds);
 }
