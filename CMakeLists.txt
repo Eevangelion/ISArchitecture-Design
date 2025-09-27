@@ -24,6 +24,9 @@ FetchContent_MakeAvailable(catch2)
 file(GLOB_RECURSE TEST_FILES tests/*.cpp)
 add_executable(interpreter_tests ${TEST_FILES})
 
+file(COPY ${CMAKE_SOURCE_DIR}/tests/command/test_filedata/ 
+     DESTINATION ${CMAKE_BINARY_DIR}/tests/command/test_filedata/)
+
 target_link_directories(interpreter_tests PRIVATE include)
 target_link_libraries(interpreter_tests PRIVATE my_lib Catch2::Catch2WithMain)
 

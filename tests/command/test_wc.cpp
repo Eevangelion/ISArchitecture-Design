@@ -4,7 +4,7 @@
 #include "command/wc.h"
 
 namespace {
-    std::vector<std::string> filepaths = {"tests/command/test_filedata/1.txt", "tests/command/test_filedata/2", "tests/command/test_filedata/empty.txt"};
+    std::vector<std::string> filepaths = {"./tests/command/test_filedata/1.txt", "./tests/command/test_filedata/2", "./tests/command/test_filedata/empty.txt"};
 }
 
 TEST_CASE("Wc: common file") 
