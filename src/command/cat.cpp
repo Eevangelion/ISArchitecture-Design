@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <fstream>
 
+#include <stdexcept>
 
 cat_command_t::cat_command_t() 
 {
