@@ -1,4 +1,7 @@
-#include "../../include/parsing/lexer.h"
+#include "parsing/lexer.h"
+
+#include <iterator>
+#include <string>
 
 lexer_t::lexer_t()
 {
