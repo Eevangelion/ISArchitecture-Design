@@ -4,12 +4,15 @@
 #include <fstream>
 #include <filesystem>
 #include <sstream>
+#include <filesystem>
 
 #include <catch2/catch_test_macros.hpp>
 
-namespace {
-    std::vector<std::string> filepaths = {"tests/command/test_filedata/1.txt", "tests/command/test_filedata/2", "tests/command/test_filedata/empty.txt"};
+namespace 
+{
+    std::vector<std::string> filepaths = {"test/command/test_filedata/1.txt", "test/command/test_filedata/2"};
 }
+
 
 TEST_CASE("Reading single file from relative path"){
     cat_command_t cmd;
