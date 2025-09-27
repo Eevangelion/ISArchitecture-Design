@@ -1,7 +1,7 @@
 #ifndef HW1_PARSING_PARSER_H_
 #define HW1_PARSING_PARSER_H_
 
-#include "../command/command.h"
+#include "command/command.h"
 
 #include <vector>
 #include <memory>

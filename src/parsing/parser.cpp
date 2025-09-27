@@ -1,9 +1,7 @@
-#include "../../include/parsing/parser.h"
+#include "parsing/parser.h"
 
 #include <iterator>
 #include <string>
-// #include <stdexcept>
-
 #include <iostream>
 
 parser_t::parser_t()

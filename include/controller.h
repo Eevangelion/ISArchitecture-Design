@@ -8,9 +8,9 @@
 
 class controller {
 private:
-    lexer* _lexer;
-    parser* _parser;
-    pipeline_processor* _pipeline_processor;
+    lexer_t* lexer;
+    parser_t* parser;
+    pipeline_processor_t* pipeline_processor;
 public:
     controller();
     std::string process(std::string&);
