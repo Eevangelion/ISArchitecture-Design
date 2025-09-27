@@ -1,6 +1,7 @@
 #include "parsing/lexer.h"
 
 #include <string>
+#include <stdexcept>
 
 lexer_t::lexer_t()
 {
