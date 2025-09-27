@@ -34,7 +34,10 @@ jobs:
           with:
             name: build-artifacts
             path: ${{github.workspace}}/build
+        - name: Restore executable permissions
+          working-directory: ${{github.workspace}}/build
+          run: chmod +x $(find . -type f -executable -o -name "*.out" -o -name "*test*" | grep -v "\.so")
 
         - name: Run CTest
           working-directory: ${{github.workspace}}/build
-          run: sudo ctest --output-on-failure
+          run: ctest --output-on-failure
