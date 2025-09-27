@@ -1,10 +1,10 @@
 #pragma once
 
-#include "command.h"
+#include "command/file_command.h"
 
 #include <string>
 
-class cat_command_t : public command_t
+class cat_command_t : public file_command_t
 {
 public:
     cat_command_t();
