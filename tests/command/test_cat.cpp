@@ -3,10 +3,11 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 #include <catch2/catch_test_macros.hpp>
 
-std::vector<std::string> filepaths = {"test/command/test_filedata/1.txt", "test/command/test_filedata/2"};
+std::vector<std::string> filepaths = {"tests/command/test_filedata/1.txt", "tests/command/test_filedata/2"};
 
 
 TEST_CASE("Reading single file from relative path"){
