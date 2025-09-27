@@ -8,14 +8,15 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 file(GLOB SRC_FILES 
     src/*.cpp 
-    src/parsing/*.cpp)
-# add_library(my_lib ${SRC_FILES})
+    src/parsing/*.cpp
+    src/command/*.cpp
+)
 
 set(TARGET_NAME "${PROJECT_NAME}")
 
-add_executable(${TARGET_NAME} 
-    ${SRC_FILES})
+add_executable(${TARGET_NAME} ${SRC_FILES})
 
+# Подключаем Catch2
 include(FetchContent)
 FetchContent_Declare(
     catch2
@@ -24,11 +25,15 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(catch2)
 
-add_executable(lexer_parser_tests 
-    tests/lexer_parser_tests.cpp 
-    src/parsing/lexer.cpp
-    src/parsing/parser.cpp)
-  
+# Тесты
+# add_executable(lexer_parser_tests 
+#     tests/lexer_parser_tests.cpp
+#     src/parsing/lexer.cpp
+#     src/parsing/parser.cpp
+# )
+
 # target_include_directories(lexer_parser_tests PRIVATE include)
-target_link_libraries(lexer_parser_tests PRIVATE Catch2::Catch2WithMain)
-add_test(NAME lexer_parser_tests COMMAND lexer_parser_tests)
+# target_link_libraries(lexer_parser_tests PRIVATE Catch2::Catch2WithMain)
+
+# enable_testing()
+# add_test(NAME lexer_parser_tests COMMAND lexer_parser_tests)

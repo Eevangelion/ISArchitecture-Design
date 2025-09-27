@@ -1,16 +1,23 @@
 #include "command/cat.h"
 
-cat_command::cat_command() {};
+cat_command_t::cat_command_t() 
+{
+}
 
-std::string cat_command::process() {
+cat_command_t::~cat_command_t() 
+{
+}
+
+std::string cat_command_t::process() 
+{
     std::string result;
-    for (std::string &path : this->arguments) {
-        if (!this->is_file_exists(path)) {
+    for (auto const& path : get_arguments()) 
+    {
+        if (!is_file_exists(path))
             throw std::runtime_error("File " + path + " does not exist.");
-        }
-        result += this->read_file(path);
-    };
+
+        result += read_file(path);
+    }
+
     return result;
 };
-
-cat_command::~cat_command() {};

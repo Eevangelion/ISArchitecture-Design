@@ -1,14 +1,14 @@
-#ifndef HW1_COMMAND_CAT_H_
-#define HW1_COMMAND_CAT_H_
+#pragma once
 
-#include <string>
 #include "command.h"
 
-class cat_command : public command {
-    public:
-        cat_command();
-        std::string process() override;
-        ~cat_command();
-};
+#include <string>
 
-#endif
+class cat_command_t : public command_t
+{
+public:
+    cat_command_t();
+    ~cat_command_t();
+
+    std::string process() override;
+};

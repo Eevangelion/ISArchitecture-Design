@@ -1,24 +1,24 @@
-#ifndef HW1_COMMAND_COMMAND_H_
-#define HW1_COMMAND_COMMAND_H_
+#pragma once
 
 #include <vector>
 #include <string>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <fstream>
-#include <filesystem>
 
-class command {
-protected:
-    std::vector<std::string> arguments;
-
-    std::string read_file(std::string&);
-    bool is_file_exists(std::string&);
+class command_t 
+{
 public:
-    command();
-    void add_argument(std::string);
-    virtual std::string process() = 0;
-    virtual ~command() {}
-};
+    command_t();
+    virtual ~command_t();
+    
+    void add_argument(std::string const& argument);
+    virtual std::string process() {}
 
-#endif
+protected:
+    std::vector<std::string> const& get_arguments() const;
+
+protected:
+    std::string read_file(std::string const& file_name);
+    bool is_file_exists(std::string const& file_name);
+
+private:
+    std::vector<std::string> arguments_;
+};

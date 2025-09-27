@@ -1,14 +1,14 @@
-#ifndef HW1_COMMAND_EXIT_H_
-#define HW1_COMMAND_EXIT_H_
+#pragma once
 
-#include <string>
 #include "command.h"
 
-class exit_command : public command {
-    public:
-        exit_command();
-        std::string process() override;
-        ~exit_command();
-};
+#include <string>
 
-#endif
+class exit_command_t : public command_t
+{
+public:
+    exit_command_t();
+    ~exit_command_t();
+    
+    std::string process() override;
+};

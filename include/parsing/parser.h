@@ -1,5 +1,4 @@
-#ifndef HW1_PARSING_PARSER_H_
-#define HW1_PARSING_PARSER_H_
+#pragma once
 
 #include "../command/command.h"
 
@@ -17,5 +16,3 @@ public:
 private:
     std::unique_ptr<command_t> make_command(std::string const& name, std::vector<std::string> const& args) const;
 };
-
-#endif
