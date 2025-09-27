@@ -8,11 +8,12 @@ wc_command_t::~wc_command_t() {}
 std::string wc_command_t::process() const {
     std::string result;
     int lines_count = 0, words_count = 0, bytes_count = 0;
-    bool words_start = false;
+    bool words_start;
 
     for (auto& arg : get_arguments()) {
         if (!is_file_exists(arg))
             throw std::runtime_error("File " + arg + " does not exist.");
+        words_start = false;
         for (char& c : read_file(arg)) {
             switch (c) {
             case '\t':case ' ': {
@@ -32,6 +33,7 @@ std::string wc_command_t::process() const {
             }
             }
         }
+        words_count += words_start;
         bytes_count += std::filesystem::file_size(arg);
     }
     result += std::to_string(lines_count) + " " + std::to_string(words_count) + " " + std::to_string(bytes_count);
