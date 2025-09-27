@@ -1,7 +1,9 @@
 #include "command/extern.h"
 
+#include <array>
 #include <sstream>
 #include <iomanip>
+#include <cstdio>
 
 extern_command_t::extern_command_t(std::string const& command_name, std::vector<std::string> const& arguments)
     : command_t(arguments)
