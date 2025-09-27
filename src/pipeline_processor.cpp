@@ -4,7 +4,8 @@
 #include <vector>
 #include <memory>
 
-std::string pipeline_processor_t::process_commands(std::vector<std::unique_ptr<command_t>> const& commands) 
+
+std::string pipeline_processor_t::process_commands(std::vector<std::unique_ptr<command_t> > const& commands) 
 {
     std::string res;
     if (!commands.empty())
