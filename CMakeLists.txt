@@ -7,6 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 file(GLOB_RECURSE SRC_FILES src/*.cpp)
+add_executable(interpreter ${SRC_FILES})
+
+# Тесты
 list(FILTER SRC_FILES EXCLUDE REGEX ".*main\.cpp$")
 add_library(my_lib ${SRC_FILES})
 
@@ -20,8 +23,8 @@ FetchContent_MakeAvailable(catch2)
 
 file(GLOB_RECURSE TEST_FILES tests/*.cpp)
 add_executable(interpreter_tests ${TEST_FILES})
-add_executable(interpreter ${CMAKE_SOURCE_DIR}/src/main.cpp)
 
+target_link_directories(interpreter_tests PRIVATE include)
 target_link_libraries(interpreter_tests PRIVATE my_lib Catch2::Catch2WithMain)
 
 include(CTest)
