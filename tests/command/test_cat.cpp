@@ -1,5 +1,9 @@
 #include "command/cat.h"
+
 #include <vector>
+#include <fstream>
+#include <sstream>
+
 #include <catch2/catch_test_macros.hpp>
 
 std::vector<std::string> filepaths = {"test/command/test_filedata/1.txt", "test/command/test_filedata/2"};
