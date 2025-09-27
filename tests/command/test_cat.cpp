@@ -10,7 +10,8 @@
 
 namespace 
 {
-    std::vector<std::string> filepaths = {"test/command/test_filedata/1.txt", "test/command/test_filedata/2"};
+    std::vector<std::string> filepaths = {"command/test_filedata/1.txt", 
+                                          "command/test_filedata/2"};
 }
 
 

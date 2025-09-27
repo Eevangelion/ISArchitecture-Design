@@ -1,9 +1,3 @@
-#include <vector>
-#include <memory>
-#include <stdexcept>
-#include <sstream>
-#include <fstream>
-
 #include "command/command.h"
 #include "command/cat.h"
 #include "command/pwd.h"
@@ -12,23 +6,24 @@
 #include "command/wc.h"
 #include "pipeline_processor.h"
 
+#include <vector>
+#include <memory>
+#include <stdexcept>
+#include <sstream>
+#include <fstream>
+
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("No commands") {
-    // pipeline_processor_t pp;
-    // std::vector<std::unique_ptr<command_t>> cmds = {};
-    // REQUIRE_THROWS_AS(pp.process_commands(cmds), std::runtime_error);
-};
-
-TEST_CASE("Single command") {
+TEST_CASE("Single command") 
+{
     pipeline_processor_t pp;
-    std::vector<std::unique_ptr<command_t>> cmds = {};
+    std::vector<std::unique_ptr<command_t>> cmds;
 
     cat_command_t cat_cmd;
-    cat_cmd.add_argument("tests/command/test_filedata/1.txt");
+    cat_cmd.add_argument("command/test_filedata/1.txt");
     cmds.emplace_back(std::make_unique<cat_command_t>(cat_cmd));
 
-    std::ifstream in("tests/command/test_filedata/1.txt");
+    std::ifstream in("command/test_filedata/1.txt");
     std::stringstream buf;
     buf << in.rdbuf();
     std::string test = buf.str();
