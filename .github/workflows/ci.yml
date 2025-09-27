@@ -8,10 +8,7 @@ jobs:
         steps:
         - name: Checkout repository
           uses: actions/checkout@v4
-        
-        - name: Create build directory
-          uses: mkdir build
-        
+          
         - name: Configure CMake
           run: cmake .
         
