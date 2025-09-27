@@ -2,8 +2,6 @@
 
 #include "command.h"
 
-#include <string>
-
 class exit_command_t : public command_t
 {
 public:

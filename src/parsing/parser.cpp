@@ -5,6 +5,7 @@
 #include "command/wc.h"
 #include "command/pwd.h"
 #include "command/exit.h"
+#include "command/extern.h"
 
 #include <iterator>
 #include <string>
@@ -40,5 +41,5 @@ std::unique_ptr<command_t> parser_t::make_command(std::string const& name, std::
     if (name == "pwd")  return std::make_unique<pwd_command_t>();
     if (name == "exit") return std::make_unique<exit_command_t>();
 
-    return std::make_unique<cat_command_t>(); //todo
+    return std::make_unique<extern_command_t>(name, args);
 }

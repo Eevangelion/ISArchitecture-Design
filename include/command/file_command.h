@@ -1,6 +1,6 @@
 #pragma once
 
-#include "command/command.h"
+#include "command.h"
 
 class file_command_t : public command_t 
 {

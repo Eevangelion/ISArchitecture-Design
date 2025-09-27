@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "command/file_command.h"
+#include "file_command.h"
 
 class wc_command_t : public file_command_t 
 {

@@ -1,8 +1,6 @@
 #pragma once
 
-#include "command/file_command.h"
-
-#include <string>
+#include "file_command.h"
 
 class cat_command_t : public file_command_t
 {
