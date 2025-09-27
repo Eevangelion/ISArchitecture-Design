@@ -1,8 +1,21 @@
 #ifndef HW1_PARSING_PARSER_H_
 #define HW1_PARSING_PARSER_H_
-class parser {
-private:
+
+#include "../command/command.h"
+
+#include <vector>
+#include <memory>
+
+class parser_t 
+{
 public:
-    parser();
+    parser_t();
+    ~parser_t();
+
+    std::vector<std::unique_ptr<command_t>> parse(std::vector<std::string> const& tokens) const;
+
+private:
+    std::unique_ptr<command_t> make_command(std::string const& name, std::vector<std::string> const& args) const;
 };
+
 #endif

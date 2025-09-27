@@ -1,4 +1,9 @@
 #ifndef HW1_COMMAND_COMMAND_H_
 #define HW1_COMMAND_COMMAND_H_
 
+class command_t
+{
+
+};
+
 #endif

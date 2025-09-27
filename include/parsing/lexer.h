@@ -1,8 +1,16 @@
 #ifndef HW1_PARSING_LEXER_H_
 #define HW1_PARSING_LEXER_H_
-class lexer {
-private:
+
+#include <vector>
+#include <string>
+
+class lexer_t 
+{
 public:
-    lexer();
+    lexer_t();
+    ~lexer_t();
+
+    std::vector<std::string> tokenize(std::string const& input) const;
 };
+
 #endif
