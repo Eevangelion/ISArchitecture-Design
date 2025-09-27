@@ -1,19 +1,15 @@
 cmake_minimum_required(VERSION 3.14)
-project(simple_interpreter)
+project(SimpleInterpreter LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-file(GLOB_RECURSE SRC_FILES src/*.cpp 
-)
+file(GLOB_RECURSE SRC_FILES src/*.cpp)
+list(FILTER SRC_FILES EXCLUDE REGEX ".*main\.cpp$")
+add_library(my_lib ${SRC_FILES})
 
-set(TARGET_NAME "${PROJECT_NAME}")
-
-add_executable(${TARGET_NAME} ${SRC_FILES})
-
-# Подключаем Catch2
 include(FetchContent)
 FetchContent_Declare(
     catch2
@@ -22,15 +18,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(catch2)
 
-# Тесты
-# add_executable(lexer_parser_tests 
-#     tests/lexer_parser_tests.cpp
-#     src/parsing/lexer.cpp
-#     src/parsing/parser.cpp
-# )
+file(GLOB_RECURSE TEST_FILES tests/*.cpp)
+add_executable(interpreter_tests ${TEST_FILES})
+add_executable(interpreter ${CMAKE_SOURCE_DIR}/src/main.cpp)
 
-# target_include_directories(lexer_parser_tests PRIVATE include)
-# target_link_libraries(lexer_parser_tests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(interpreter_tests PRIVATE my_lib Catch2::Catch2WithMain)
 
-# enable_testing()
-# add_test(NAME lexer_parser_tests COMMAND lexer_parser_tests)
+include(CTest)
+include(Catch)
+enable_testing()
+catch_discover_tests(interpreter_tests)
