@@ -1,10 +1,14 @@
 #include "parsing/parser.h"
 
+#include "command/echo.h"
 #include "command/cat.h"
+#include "command/wc.h"
+#include "command/pwd.h"
+#include "command/exit.h"
+#include "command/extern.h"
 
 #include <iterator>
 #include <string>
-#include <iostream>
 
 parser_t::parser_t()
 {
@@ -31,30 +35,11 @@ std::vector<std::unique_ptr<command_t>> parser_t::parse(std::vector<std::string>
 
 std::unique_ptr<command_t> parser_t::make_command(std::string const& name, std::vector<std::string> const& args) const
 {
-    // if (name == "echo") return std::make_unique<echo_command_t>(args);
-    // if (name == "cat")  return std::make_unique<cat_command_t>(args);
-    // if (name == "wc")   return std::make_unique<wc_command_t>(args);
-    // if (name == "pwd")  return std::make_unique<pwd_command_t>(args);
-    // if (name == "exit") return std::make_unique<exit_command_t>(args);
+    if (name == "echo") return std::make_unique<echo_command_t>(args);
+    if (name == "cat")  return std::make_unique<cat_command_t>(args);
+    if (name == "wc")   return std::make_unique<wc_command_t>(args);
+    if (name == "pwd")  return std::make_unique<pwd_command_t>();
+    if (name == "exit") return std::make_unique<exit_command_t>();
 
-    auto test_command = [&](std::string const& parsed_command)
-    {
-        std::cout << "parsed command " << parsed_command << std::endl;
-        std::cout << "current command " << name << std::endl;
-        std::cout << "commands " << " ";
-        for (auto const& arg : args)
-            std::cout << arg << " ";
-    
-        std::cout << std::endl;
-    };
-
-    if (name == "echo") test_command("echo");
-    if (name == "cat")  test_command("cat");
-    if (name == "wc")   test_command("wc");
-    if (name == "pwd")  test_command("pwd");
-    if (name == "exit") test_command("exit");
-
-    return std::make_unique<cat_command_t>();
-
-    // throw std::runtime_error("no such command implemented!");
+    return std::make_unique<extern_command_t>(name, args);
 }
