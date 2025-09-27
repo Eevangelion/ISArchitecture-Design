@@ -8,10 +8,13 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-namespace 
-{
-    std::vector<std::string> filepaths = {"command/test_filedata/1.txt", 
-                                          "command/test_filedata/2"};
+namespace {
+    std::vector<std::string> filepaths = 
+    {
+        "./tests/command/test_filedata/1.txt", 
+        "./tests/command/test_filedata/2", 
+        "./tests/command/test_filedata/empty.txt"
+    };
 }
 
 
