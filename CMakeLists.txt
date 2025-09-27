@@ -6,10 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-file(GLOB SRC_FILES 
-    src/*.cpp 
-    src/parsing/*.cpp
-    src/command/*.cpp
+file(GLOB_RECURSE SRC_FILES src/*.cpp 
 )
 
 set(TARGET_NAME "${PROJECT_NAME}")
