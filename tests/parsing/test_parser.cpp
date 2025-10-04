@@ -7,7 +7,7 @@
 TEST_CASE("Parser: много ковычек") 
 {
     lexer_t lx;
-    // REQUIRE_THROWS_AS(lx.tokenize("echo '''a b 'ab'' \"c d\"'"), error_handler_t::error_type::INVALID_INPUT_EXCEPTION);
+    REQUIRE_THROWS_AS(lx.tokenize("echo '''a b 'ab'' \"c d\"'"), error_handler_t::error_type);
 }
 
 TEST_CASE("Parser: простая команда с аргами") 

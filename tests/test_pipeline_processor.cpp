@@ -31,11 +31,4 @@ TEST_CASE("Single command")
     REQUIRE(pp.process_commands(cmds) == test);
 };
 
-// TEST_CASE("Two different commands") {
-
-// };
-
-// TEST_CASE("More than two commands") {
-
-// };
 
