@@ -5,6 +5,7 @@
 #include "command/wc.h"
 #include "command/pwd.h"
 #include "command/exit.h"
+#include "command/update_state.h"
 #include "command/extern.h"
 
 #include <iterator>
@@ -49,6 +50,14 @@ std::vector<std::unique_ptr<command_t>> parser_t::parse(std::vector<std::string>
 
 std::unique_ptr<command_t> parser_t::make_command(std::string const& name, std::vector<std::string> const& args) const
 {
+    if (name.find('=') != std::string::npos) 
+    {
+        auto pos = name.find('=');
+        std::string key = name.substr(0, pos);
+        std::string value = name.substr(pos + 1);
+        return std::make_unique<update_state_command_t>(key, value);
+    }
+
     if (name == "echo") return std::make_unique<echo_command_t>(args);
     if (name == "cat")  return std::make_unique<cat_command_t>(args);
     if (name == "wc")   return std::make_unique<wc_command_t>(args);

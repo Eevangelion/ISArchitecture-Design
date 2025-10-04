@@ -12,7 +12,8 @@ update_state_command_t::~update_state_command_t()
 {
 }
 
-std::string update_state_command_t::process() const {
+std::string update_state_command_t::process() const 
+{
     //env.set_storage(this->key, this->value)
     return this->value;
 }
