@@ -23,12 +23,25 @@ std::vector<std::unique_ptr<command_t>> parser_t::parse(std::vector<std::string>
     if (tokens.empty())
         return {};
 
-    //пайпы - здесь надо будет делить по "|"
-    std::string const& name = tokens[0];
-    std::vector<std::string> args(std::next(tokens.begin()), tokens.end());
-
     std::vector<std::unique_ptr<command_t>> commands;
-    commands.emplace_back(make_command(name, args));
+    auto it = tokens.begin();
+    while (it != tokens.end()) 
+    {
+        auto pipe_pos = std::find(it, tokens.end(), "|");
+
+        std::vector<std::string> segment(it, pipe_pos);
+        if (!segment.empty()) 
+        {
+            std::string name = segment[0];
+            std::vector<std::string> args(std::next(segment.begin()), segment.end());
+            commands.emplace_back(make_command(name, args));
+        }
+
+        if (pipe_pos == tokens.end())
+            break;
+        else
+            it = std::next(pipe_pos);
+    }
 
     return commands;
 }

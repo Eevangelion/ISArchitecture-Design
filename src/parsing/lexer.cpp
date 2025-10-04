@@ -1,3 +1,4 @@
+#include "environment.h"
 #include "parsing/lexer.h"
 
 #include <string>
@@ -16,6 +17,38 @@ std::vector<std::string> lexer_t::tokenize(std::string const& input) const
     std::vector<std::string> tokens;
     bool in_quotes = false;
     char quote_char = '\0';
+
+    auto get_variable = [](std::string const& token)
+    {
+        std::string norm_token;
+        for (size_t i = 0; i < token.size(); ++i) 
+        {
+            if (token[i] == '$') 
+            {
+                size_t j = i + 1;
+                std::string name;
+                while (j < token.size() && (std::isalnum((unsigned char)token[j]) || token[j] == '_'))
+                    name += token[j++];
+
+                if (!name.empty()) 
+                {
+                    norm_token += environment_t::get_instance().get_variable(name);
+                    i = j - 1;
+                } 
+                else 
+                {
+                    norm_token += '$';
+                }
+            } 
+            else 
+            {
+                norm_token += token[i];
+            }
+        }
+        
+        return norm_token;
+    };
+
     std::string current;
     for (auto const& c : input)
     {
@@ -39,7 +72,19 @@ std::vector<std::string> lexer_t::tokenize(std::string const& input) const
         else if (std::isspace((unsigned char)c) && !in_quotes)
         {
             if (!current.empty())
-                tokens.emplace_back(std::move(current));
+            {
+                tokens.emplace_back(get_variable(current));
+                current.clear();
+            }
+        }
+        else if (c == '|' && !in_quotes)
+        {
+            if (!current.empty()) 
+            {
+                tokens.emplace_back(get_variable(current));
+                current.clear();
+            }
+            tokens.emplace_back("|");
         }
         else
         {
@@ -48,7 +93,7 @@ std::vector<std::string> lexer_t::tokenize(std::string const& input) const
     }
 
     if (!current.empty())
-        tokens.emplace_back(std::move(current));
+        tokens.emplace_back(get_variable(current));
 
     if (in_quotes)
         throw std::runtime_error("invalid input!");
