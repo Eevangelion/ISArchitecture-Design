@@ -9,6 +9,7 @@
 
 #include <iterator>
 #include <string>
+#include <algorithm>
 
 parser_t::parser_t()
 {
