@@ -3,8 +3,8 @@
 #include <string>
 
 update_state_command_t::update_state_command_t(std::string const& key, std::string const& value) 
-    : key(key),
-    value(value) 
+    : key(key)
+    , value(value) 
 {
 }
 
