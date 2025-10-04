@@ -31,4 +31,23 @@ TEST_CASE("Single command")
     REQUIRE(pp.process_commands(cmds) == test);
 };
 
+TEST_CASE("Multiple commands")
+{
+    pipeline_processor_t pp;
+    std::vector<std::unique_ptr<command_t>> cmds;
 
+    echo_command_t echo_cmd;
+    echo_cmd.add_argument("./tests/command/test_filedata/1.txt");
+    cmds.emplace_back(std::make_unique<echo_command_t>(echo_cmd));
+
+    cat_command_t cat_cmd;
+    cmds.emplace_back(std::make_unique<cat_command_t>(cat_cmd));
+
+    std::ifstream in("./tests/command/test_filedata/1.txt");
+    std::stringstream buf;
+    buf << in.rdbuf();
+    std::string test = buf.str();
+
+    REQUIRE(pp.process_commands(cmds) == test);
+
+}

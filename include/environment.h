@@ -3,9 +3,17 @@
 #include <string>
 #include <map>
 
+/*
+* Класс-синглтон, отвечающий за управление окружением, в частности, за обеспечение
+* сохранения и получения значений переменных.
+*/
+
 class environment_t
 {
 public: 
+    /*
+    * Позволяет получить ссылку на уникальный экземпляр класса.
+    */
     static environment_t& get_instance();
 
     void set_variable(std::string const& key, std::string const& value);

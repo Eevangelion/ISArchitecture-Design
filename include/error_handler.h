@@ -1,10 +1,20 @@
 #pragma once
 
-#include <exception/exception.h>
+#include <string>
 
+/*
+* Класс-синглтон, отвечающий за обработку ошибок в программе.
+*/
 class error_handler_t {
     public:
+        /*
+        * Позволяет получить уникальный экземпляр класса.
+        */
         static error_handler_t& get_instance();
+
+        /*
+        * Перечисление с классификацией возможных ошибок.
+        */
         
         enum class error_type {
             EXIT_EXCEPTION,
@@ -13,6 +23,10 @@ class error_handler_t {
             INVALID_INPUT_EXCEPTION,
             POPEN_FAILED_EXCEPTION,
         };
+
+        /*
+        * Выдает ошибку и сохраняет её описание, если таковое есть, в приватном поле класса.
+        */
 
         void throw_error(error_handler_t::error_type const& type, std::string const& desc = "");
 
