@@ -4,8 +4,8 @@
 #include <catch2/catch_all.hpp>
 
 TEST_CASE("Environment: установка и получение переменной") {
-    environment_t::get_instance().set_variable("USER", "alex");
-    REQUIRE(environment_t::get_instance().get_variable("USER") == "alex");
+    environment_t::get_instance().set_variable("USER", "bob");
+    REQUIRE(environment_t::get_instance().get_variable("USER") == "bob");
 }
 
 TEST_CASE("Environment: пустое значение если переменной нет") {
@@ -21,12 +21,12 @@ TEST_CASE("Environment: обновление существующей перем
 
 TEST_CASE("Lexer: подстановка переменной окружения") {
     auto& env = environment_t::get_instance();
-    env.set_variable("USER", "alex");
+    env.set_variable("USER", "bob");
 
     lexer_t lx;
     auto tokens = lx.tokenize("echo $USER");
     REQUIRE(tokens.size() == 2);
-    REQUIRE(tokens[1] == "alex");
+    REQUIRE(tokens[1] == "bob");
 }
 
 TEST_CASE("Lexer: подстановка с подчёркиванием") {
