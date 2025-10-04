@@ -13,7 +13,7 @@ std::string pipeline_processor_t::process_commands(std::vector<std::unique_ptr<c
 
     if (commands.size() > 1) 
     {
-        for (size_t i = 1; i < commands.size() - 1; ++i) 
+        for (size_t i = 1; i < commands.size(); ++i) 
         {
             commands[i]->add_argument(res);
             res = commands[i]->process();
