@@ -23,4 +23,5 @@ protected:
     */
     std::string read_file(std::string const& file_name) const;
     bool is_file_exists(std::string const& file_name) const;
+    bool is_path_directory(std::string const& file_name) const;
 };

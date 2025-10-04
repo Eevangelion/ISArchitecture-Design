@@ -14,18 +14,19 @@ wc_command_t::~wc_command_t()
 }
 
 std::string wc_command_t::process() const 
-{
+{   
     std::string result;
     uint64_t lines_count = 0, words_count = 0, bytes_count = 0;
     bool words_start;
 
     for (auto const& arg : get_arguments()) 
     {
-        if (!is_file_exists(arg)) {
-            error_handler_t& error_handler = error_handler.get_instance();
-            error_handler.throw_error(error_handler_t::error_type::FILE_NOT_FOUND_EXCEPTION, "File " + arg + " does not exist.");
-        }
-        
+        if (!is_file_exists(arg)) 
+            error_handler_t::get_instance().throw_error(error_handler_t::error_type::FILE_NOT_FOUND_EXCEPTION, "File " + arg + " does not exist.");
+
+        if (is_path_directory(arg))
+            error_handler_t::get_instance().throw_error(error_handler_t::error_type::FILE_IS_DIRECTORY_EXCEPTION, "Path " + arg + " is a directory.");
+
         words_start = false;
         for (char const& c : read_file(arg)) 
         {

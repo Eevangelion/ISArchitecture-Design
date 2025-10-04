@@ -14,7 +14,10 @@ int main(int argc, char* argv[])
     while (std::getline(std::cin, line)) 
         {   
             try {
-                std::cout << controller->process(line) << std::endl;
+                std::string res = controller->process(line);
+                if (res.size() > 0) {
+                    std::cout << res << std::endl;
+                }
             } 
             catch(error_handler_t::error_type const& e)
             {

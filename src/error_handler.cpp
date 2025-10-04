@@ -22,6 +22,7 @@ bool error_handler_t::handle_error(error_handler_t::error_type const& type) {
             std::cout << "Exit!" << std::endl;
             return true;
         case error_type::FILE_NOT_FOUND_EXCEPTION:
+        case error_type::FILE_IS_DIRECTORY_EXCEPTION:
         case error_type::INVALID_INPUT_EXCEPTION:
         case error_type::POPEN_FAILED_EXCEPTION:
             std::cout << desc << std::endl;

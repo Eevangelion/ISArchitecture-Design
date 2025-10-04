@@ -11,6 +11,5 @@ exit_command_t::~exit_command_t()
 
 std::string exit_command_t::process() const
 {
-    error_handler_t& error_handler = error_handler_t::get_instance();
-    error_handler.throw_error(error_handler_t::error_type::EXIT_EXCEPTION);
+    error_handler_t::get_instance().throw_error(error_handler_t::error_type::EXIT_EXCEPTION);
 }

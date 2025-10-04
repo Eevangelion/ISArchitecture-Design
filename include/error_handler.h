@@ -9,6 +9,7 @@ class error_handler_t {
         enum class error_type {
             EXIT_EXCEPTION,
             FILE_NOT_FOUND_EXCEPTION,
+            FILE_IS_DIRECTORY_EXCEPTION,
             INVALID_INPUT_EXCEPTION,
             POPEN_FAILED_EXCEPTION,
         };

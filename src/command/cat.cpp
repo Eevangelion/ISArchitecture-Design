@@ -18,10 +18,11 @@ std::string cat_command_t::process() const
     std::string result;
     for (auto const& path : get_arguments()) 
     {
-        if (!std::filesystem::exists(path)) {
-            error_handler_t& error_handler = error_handler_t::get_instance();
-            error_handler.throw_error(error_handler_t::error_type::FILE_NOT_FOUND_EXCEPTION, "File " + path + " does not exist.");
-        }
+        if (!is_file_exists(path))  
+            error_handler_t::get_instance().throw_error(error_handler_t::error_type::FILE_NOT_FOUND_EXCEPTION, "File " + path + " does not exist.");
+        
+        if (is_path_directory(path))
+            error_handler_t::get_instance().throw_error(error_handler_t::error_type::FILE_IS_DIRECTORY_EXCEPTION, "Path " + path + " is a directory.");
 
         result += read_file(path);
     }

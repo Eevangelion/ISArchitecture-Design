@@ -31,8 +31,7 @@ std::string extern_command_t::process() const
     std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.str().c_str(), "r"), pclose);
 
     if (!pipe) {
-        error_handler_t& error_handler = error_handler_t::get_instance();
-        error_handler.throw_error(error_handler_t::error_type::POPEN_FAILED_EXCEPTION, "popen() failed");
+        error_handler_t::get_instance().throw_error(error_handler_t::error_type::POPEN_FAILED_EXCEPTION, "popen() failed");
     }
 
     while (fgets(buffer.data(), static_cast<int>(buffer.size()), pipe.get()) != nullptr) 

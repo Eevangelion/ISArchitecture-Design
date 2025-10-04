@@ -32,3 +32,8 @@ bool file_command_t::is_file_exists(std::string const& name) const
 {
     return std::filesystem::exists(name);
 }
+
+bool file_command_t::is_path_directory(std::string const& name) const 
+{
+    return std::filesystem::is_directory(name);
+}

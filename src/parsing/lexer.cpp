@@ -97,8 +97,7 @@ std::vector<std::string> lexer_t::tokenize(std::string const& input) const
         tokens.emplace_back(get_variable(current));
 
     if (in_quotes) {
-        error_handler_t& error_handler = error_handler_t::get_instance();
-        error_handler.throw_error(error_handler_t::error_type::INVALID_INPUT_EXCEPTION, "Invalid quote input");
+        error_handler_t::get_instance().throw_error(error_handler_t::error_type::INVALID_INPUT_EXCEPTION, "Invalid quote input");
     }
     return tokens;
 }
