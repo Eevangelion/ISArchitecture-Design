@@ -27,7 +27,7 @@ std::vector<std::unique_ptr<command_t>> parser_t::parse(std::vector<std::string>
     auto it = tokens.begin();
     while (it != tokens.end()) 
     {
-        auto pipe_pos = std::find(it, tokens.end(), "|");
+        auto pipe_pos = std::find(it, tokens.end(), std::string("|"));
 
         std::vector<std::string> segment(it, pipe_pos);
         if (!segment.empty()) 
