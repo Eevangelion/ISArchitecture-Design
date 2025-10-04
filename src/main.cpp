@@ -4,7 +4,7 @@
 
 #include "../include/parsing/lexer.h"
 #include "../include/controller.h"
-#include "../include/exception/exception.h"
+#include "../include/error_handler.h"
 
 int main(int argc, char* argv[]) 
 {
@@ -16,14 +16,13 @@ int main(int argc, char* argv[])
             try {
                 std::cout << controller->process(line) << std::endl;
             } 
-            catch(exit_exception const& e)
+            catch(error_handler_t::error_type const& e)
             {
-                std::cout << "Exit!\n";
-                return 0;
-            }
-            catch(std::runtime_error const& e)
-            {
-                std::cout << e.what() << std::endl;
+                error_handler_t& error_handler = error_handler_t::get_instance();
+                bool should_close = error_handler.handle_error(e);
+                if (should_close) {
+                    return 0;
+                }
             }
         }
 

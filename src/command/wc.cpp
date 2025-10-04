@@ -1,4 +1,5 @@
 #include "command/wc.h"
+#include "error_handler.h"
 
 #include <filesystem>
 #include <stdexcept>
@@ -20,8 +21,10 @@ std::string wc_command_t::process() const
 
     for (auto const& arg : get_arguments()) 
     {
-        if (!is_file_exists(arg))
-            throw std::runtime_error("File " + arg + " does not exist.");
+        if (!is_file_exists(arg)) {
+            error_handler_t& error_handler = error_handler.get_instance();
+            error_handler.throw_error(error_handler_t::error_type::FILE_NOT_FOUND_EXCEPTION, "File " + arg + " does not exist.");
+        }
         
         words_start = false;
         for (char const& c : read_file(arg)) 

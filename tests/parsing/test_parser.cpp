@@ -2,11 +2,12 @@
 #include <catch2/catch_test_macros.hpp>
 #include "parsing/lexer.h"
 #include "parsing/parser.h"
+#include "error_handler.h"
 
 TEST_CASE("Parser: много ковычек") 
 {
     lexer_t lx;
-    REQUIRE_THROWS_AS(lx.tokenize("echo '''a b 'ab'' \"c d\"'"), std::runtime_error);
+    REQUIRE_THROWS_AS(lx.tokenize("echo '''a b 'ab'' \"c d\"'"), error_handler_t::error_type::INVALID_INPUT_EXCEPTION);
 }
 
 TEST_CASE("Parser: простая команда с аргами") 

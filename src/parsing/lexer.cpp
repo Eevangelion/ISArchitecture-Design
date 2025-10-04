@@ -1,5 +1,6 @@
 #include "environment.h"
 #include "parsing/lexer.h"
+#include "error_handler.h"
 
 #include <string>
 #include <stdexcept>
@@ -95,8 +96,9 @@ std::vector<std::string> lexer_t::tokenize(std::string const& input) const
     if (!current.empty())
         tokens.emplace_back(get_variable(current));
 
-    if (in_quotes)
-        throw std::runtime_error("invalid input!");
-
+    if (in_quotes) {
+        error_handler_t& error_handler = error_handler_t::get_instance();
+        error_handler.throw_error(error_handler_t::error_type::INVALID_INPUT_EXCEPTION, "Invalid quote input");
+    }
     return tokens;
 }

@@ -1,4 +1,5 @@
 #include "command/cat.h"
+#include "error_handler.h"
 
 #include <vector>
 #include <fstream>
@@ -80,5 +81,5 @@ TEST_CASE("Reading multiple files from absolute path"){
 TEST_CASE("Reading from non-existent files"){
     cat_command_t cmd;
     cmd.add_argument("gibberish");
-    REQUIRE_THROWS_AS(cmd.process(), std::runtime_error);
+    REQUIRE_THROWS_AS(cmd.process(), error_handler_t::error_type::FILE_NOT_FOUND_EXCEPTION);
 }
