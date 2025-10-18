@@ -5,6 +5,7 @@
 #include "command/wc.h"
 #include "command/pwd.h"
 #include "command/exit.h"
+#include "command/grep.h"
 #include "command/update_state.h"
 #include "command/extern.h"
 
@@ -61,6 +62,7 @@ std::unique_ptr<command_t> parser_t::make_command(std::string const& name, std::
     if (name == "echo") return std::make_unique<echo_command_t>(args);
     if (name == "cat")  return std::make_unique<cat_command_t>(args);
     if (name == "wc")   return std::make_unique<wc_command_t>(args);
+    if (name == "grep") return std::make_unique<grep_command_t>(args);
     if (name == "pwd")  return std::make_unique<pwd_command_t>();
     if (name == "exit") return std::make_unique<exit_command_t>();
 

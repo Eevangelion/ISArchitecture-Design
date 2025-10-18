@@ -14,7 +14,7 @@ public:
     * В конструктор принимается список аргументов, которые записываются
     * в arguments_.
     */
-    command_t(std::vector<std::string> const& arguments = {});
+    explicit command_t(std::vector<std::string> const& arguments = {});
     virtual ~command_t();
     
     /*

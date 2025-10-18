@@ -11,7 +11,7 @@ public:
     /*
     * Может принимать аргументы; см. конструктор command_t
     */
-    echo_command_t(std::vector<std::string> const& arguments = {});
+    explicit echo_command_t(std::vector<std::string> const& arguments = {});
     ~echo_command_t();
     
     /*

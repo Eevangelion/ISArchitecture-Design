@@ -11,7 +11,7 @@ public:
     /*
     * Принимает имя незнакомой команды; может принимать аргументы. 
     */
-    extern_command_t(std::string const& command_name, std::vector<std::string> const& arguments = {});
+    explicit extern_command_t(std::string const& command_name, std::vector<std::string> const& arguments = {});
     ~extern_command_t();
 
     /*

@@ -11,7 +11,7 @@ public:
     /*
     * Может принимать аргументы; см. конструктор command_t
     */
-    cat_command_t(std::vector<std::string> const& arguments = {});
+    explicit cat_command_t(std::vector<std::string> const& arguments = {});
     ~cat_command_t();
 
     /*

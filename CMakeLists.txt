@@ -21,6 +21,16 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(catch2)
 
+FetchContent_Declare(
+    cxxopts
+    GIT_REPOSITORY https://github.com/jarro2783/cxxopts.git
+    GIT_TAG v3.2.0
+)
+FetchContent_MakeAvailable(cxxopts)
+
+target_include_directories(interpreter PRIVATE ${cxxopts_SOURCE_DIR}/include)
+target_include_directories(my_lib PRIVATE ${cxxopts_SOURCE_DIR}/include)
+
 file(GLOB_RECURSE TEST_FILES tests/*.cpp)
 add_executable(interpreter_tests ${TEST_FILES})
 
@@ -34,3 +44,7 @@ include(CTest)
 include(Catch)
 enable_testing()
 catch_discover_tests(interpreter_tests)
+
+if (MSVC)
+    target_compile_options(cli PRIVATE /utf-8)
+endif()

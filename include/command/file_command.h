@@ -12,7 +12,7 @@ public:
     /*
     * Может принимать аргументы; см. конструктор command_t
     */
-    file_command_t(std::vector<std::string> const& arguments = {});
+    explicit file_command_t(std::vector<std::string> const& arguments = {});
     virtual ~file_command_t();
 
 protected:
