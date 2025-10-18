@@ -22,6 +22,7 @@ class error_handler_t {
             FILE_IS_DIRECTORY_EXCEPTION,
             INVALID_INPUT_EXCEPTION,
             POPEN_FAILED_EXCEPTION,
+            ARGUMENTS_INVALID_EXCEPTION,
         };
 
         /*

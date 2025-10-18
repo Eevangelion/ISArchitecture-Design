@@ -1,4 +1,5 @@
 #include "command/grep.h"
+#include "error_handler.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -9,9 +10,10 @@ grep_command_t::grep_command_t(const std::vector<std::string>& args)
     try 
     {
         cxxopts::Options options("grep", "Search for patterns in files");
+        options.allow_unrecognised_options();
         options.add_options()
-            ("i", "Ignore case", cxxopts::value<bool>()->default_value("false"))
-            ("w", "Match whole words", cxxopts::value<bool>()->default_value("false"))
+            ("i,ignore_case", "Ignore case", cxxopts::value<bool>()->default_value("false"))
+            ("w,word_match", "Match whole words", cxxopts::value<bool>()->default_value("false"))
             ("A", "Print N lines after match", cxxopts::value<int>()->default_value("0"))
             ("pattern", "Regex pattern", cxxopts::value<std::string>())
             ("file", "File to read", cxxopts::value<std::string>());
@@ -19,25 +21,31 @@ grep_command_t::grep_command_t(const std::vector<std::string>& args)
         options.parse_positional({"pattern", "file"});
 
         std::vector<const char*> argv;
-        argv.reserve(args.size() + 2);
         argv.push_back("grep");
-        for (const auto& a : args)
+        for (const auto& a : args) {
             argv.push_back(a.c_str());
-        argv.push_back(nullptr);
+        }
 
         auto result = options.parse(static_cast<int>(args.size() + 1), argv.data());
 
-        pattern_ = result["pattern"].as<std::string>();
-        if (result.count("file"))
+        if (result.count("pattern")) {
+            pattern_ = result["pattern"].as<std::string>();
+        } else {
+            error_handler_t::get_instance().throw_error(error_handler_t::error_type::ARGUMENTS_INVALID_EXCEPTION, "grep: argument parsing error: no search pattern is provided");
+        }
+        if (result.count("file")) {
             filename_ = result["file"].as<std::string>();
-
+        } else {
+            error_handler_t::get_instance().throw_error(error_handler_t::error_type::ARGUMENTS_INVALID_EXCEPTION, "grep: argument parsing error: no filename is provided");
+        }
         ignore_case_ = result["i"].as<bool>();
         word_match_  = result["w"].as<bool>();
         after_lines_ = result["A"].as<int>();
+
     }
     catch (const std::exception& e) 
-    {
-        throw std::runtime_error(std::string("grep: argument parsing error: ") + e.what());
+    {   
+        error_handler_t::get_instance().throw_error(error_handler_t::error_type::ARGUMENTS_INVALID_EXCEPTION, "grep: argument parsing error: " + *e.what());
     }
 }
 
@@ -50,7 +58,7 @@ std::vector<std::string> grep_command_t::read_lines() const
     {
         std::ifstream file(filename_);
         if (!file.is_open())
-            throw std::runtime_error("grep: cannot open file " + filename_);
+            error_handler_t::get_instance().throw_error(error_handler_t::error_type::FILE_NOT_FOUND_EXCEPTION, "File " + filename_ + " does not exist.");
         while (std::getline(file, line))
             lines.push_back(line);
     } 
@@ -77,7 +85,6 @@ std::string grep_command_t::process() const
     {
         lines = read_lines();
     }
-
     std::ostringstream out;
 
     std::regex_constants::syntax_option_type flags = std::regex::ECMAScript;
