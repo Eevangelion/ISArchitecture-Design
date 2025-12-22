@@ -21,6 +21,12 @@ dependencies {
     implementation 'com.github.stefanbirkner:system-lambda:1.2.1'
 }
 
+java {
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(11))
+  }
+}
+
 application {
     // Define the main class for the application.
     mainClass = 'core.GameInitializer'
