@@ -1,0 +1,26 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        working-directory: ${{github.workspace}}/roguelike-game
+        run: chmod +x gradlew
+
+      - name: Run tests
+        working-directory: ${{github.workspace}}/roguelike-game
+        run: ./gradlew test
