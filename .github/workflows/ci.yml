@@ -21,6 +21,6 @@ jobs:
         working-directory: ${{github.workspace}}/roguelike-game
         run: chmod +x gradlew
 
-      - name: Runt tests
+      - name: Run tests
         working-directory: ${{github.workspace}}/roguelike-game
         run: ./gradlew test
