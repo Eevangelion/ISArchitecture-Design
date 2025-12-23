@@ -3,38 +3,38 @@ package lib;
 import java.util.Random;
 
 import models.Level;
+import models.mobs.MobGeneratorFactory;
 import repositories.Configuration;
+import lib.Interval;
+
 
 public class MapGenerator {
-    private static MapGenerator instance;
+    private LevelGenerator levelGenerator;
 
-    private int minLevelsAmount;
-    private int maxLevelsAmount;
+    private Size size;
+    private Interval<Integer> levelsCountInterval;
+    private MobGeneratorFactory mobGeneratorFactory;
 
     private Random random;
 
-    public static Level[] generate() {
-        if (instance == null) instance = new MapGenerator();
+    public MapGenerator(Size size, Interval<Integer> levelsCountInterval, MobGeneratorFactory mobGeneratorFactory) {
+        this.levelGenerator = new LevelGenerator(size, mobGeneratorFactory);
 
-        return instance._generate();
+        this.size = size;
+        this.levelsCountInterval = levelsCountInterval;
+        this.mobGeneratorFactory = mobGeneratorFactory;
+
+        this.random = new Random(Configuration.getRandomSeed());
     }
 
-    private MapGenerator() {
-        initialize();
-    }
+    public Level[] generate() {
+        int levelsCount = this.random.nextInt(
+          levelsCountInterval.right() - levelsCountInterval.left()
+        ) + levelsCountInterval.left();
+        Level[] levels = new Level[levelsCount];
 
-    private Level[] _generate() {
-        var levelsAmount = this.random.nextInt(maxLevelsAmount - minLevelsAmount) + minLevelsAmount;
-        var levels = new Level[levelsAmount];
-
-        for (int i = 0; i < levelsAmount; i++) levels[i] = LevelProvider.get();
+        for (int i = 0; i < levelsCount; i++) levels[i] = levelGenerator.generate();
 
         return levels;
-    }
-
-    private void initialize() {
-        this.minLevelsAmount = (Integer) Configuration.get("map_generation.minumum_levels_count");
-        this.maxLevelsAmount = (Integer) Configuration.get("map_generation.maximum_levels_count");
-        this.random = new Random(Configuration.getRandomSeed());
     }
 }

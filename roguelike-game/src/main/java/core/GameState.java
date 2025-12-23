@@ -2,8 +2,9 @@ package core;
 
 import models.Level;
 import models.Room;
-import models.Player;
-import lib.MapGenerator;
+import models.mobs.Player;
+import lib.MapBuilder;
+import repositories.Configuration;
 
 public class GameState {
     private Level level;
@@ -12,7 +13,13 @@ public class GameState {
     private int curLevelId = 0;
 
     public GameState() {
-        this.levels = MapGenerator.generate();
+        MapBuilder mapBuilder = new MapBuilder()
+          .setGenerationMethod(Configuration.getMapGenerationMethod())
+          .setSize(Configuration.getMapSize())
+          .setMobGeneratorFactory(Configuration.getMobGeneratorFactory())
+          .setLevelsCountInterval(Configuration.getMapGenerationLevelsCountInterval());
+
+        this.levels = mapBuilder.build();
         this.level = levels[0];
     }
 

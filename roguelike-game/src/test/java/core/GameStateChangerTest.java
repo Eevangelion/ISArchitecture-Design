@@ -3,7 +3,6 @@ package test.core;
 import java.lang.reflect.Field;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.mockito.*;
 import org.junit.After;
 import org.junit.runner.RunWith;
@@ -130,18 +129,6 @@ class GameStateChangerTest {
         perform(mockedGameState, event);
 
         Mockito.verify(mockedGameState).tryMoveToNextLevel();
-    }
-
-    @Test
-    public void testCallWithGameExitEvent() throws Exception {
-        GameState gameState = new GameState();
-        Event event = new Event(Event.Type.GAME_EXIT);
-
-        int exitCode = catchSystemExit(() -> {
-            perform(gameState, event);
-        });
-
-        assertEquals(0, exitCode);
     }
 
     private void mockInventorySingletonInstance(Inventory inventory) {

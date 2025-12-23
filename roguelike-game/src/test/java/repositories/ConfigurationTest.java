@@ -1,6 +1,5 @@
 package test.repositories;
 
-import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
@@ -11,7 +10,7 @@ import repositories.Configuration;
 class ConfigurationTest {
     @Test
     public void testGet_withExisingKey() {
-        Object result = Configuration.get("screen.width");
+        Object result = Configuration.get("map.width");
 
         assertTrue(result instanceof Integer);
     }

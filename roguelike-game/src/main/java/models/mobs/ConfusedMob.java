@@ -1,6 +1,8 @@
-package models;
+package models.mobs;
 
 import java.util.Random;
+import models.Room;
+import models.CollisionsResolver;
 
 import repositories.Configuration;
 

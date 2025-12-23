@@ -1,4 +1,7 @@
-package models;
+package models.mobs;
+
+import models.Room;
+import models.CollisionsResolver;
 
 interface MobBehavior {
     /**

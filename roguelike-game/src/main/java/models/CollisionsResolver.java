@@ -3,6 +3,10 @@ package models;
 import java.util.LinkedList;
 import java.util.List;
 
+import models.mobs.Mob;
+import models.mobs.ConfusedMob;
+import models.mobs.Player;
+
 public class CollisionsResolver {
     private List<GameObject> collisions;
     private int roomId;

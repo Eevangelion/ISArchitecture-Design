@@ -1,4 +1,7 @@
-package models;
+package models.mobs;
+
+import models.Room;
+import models.CollisionsResolver;
 
 public class CowardMobBehavior implements MobBehavior{
     @Override

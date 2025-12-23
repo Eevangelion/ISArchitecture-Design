@@ -2,6 +2,9 @@ package models;
 
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Random;
+
+import models.mobs.*;
 
 public class Room {
     private final int posX;
@@ -9,6 +12,7 @@ public class Room {
     private final int size;
     private boolean visible;
     private List<GameObject> objects;
+    private Random random;
 
     public Room(boolean visible, int posX, int posY, List<GameObject> objects, int size) {
         this.visible = visible;
@@ -16,6 +20,7 @@ public class Room {
         this.posY = posY;
         this.objects = objects;
         this.size = size;
+        random = new Random();
     }
 
     /**
@@ -196,5 +201,44 @@ public class Room {
                 ((Mob) object).makeNextMove(player, this, collisionsResolver);
             }
         }
+    }
+
+    private Mob tryReplicateMob(ClonableMob mob) {
+        float p = random.nextFloat();
+        ClonableMob clonableMob = (ClonableMob) mob;
+        Mob clonedMob = null;
+        if (p < clonableMob.getReplicationProb()) {
+            clonedMob = (Mob) clonableMob.clone();
+        }
+
+        if (clonedMob == null)
+            return null;
+
+        boolean wasPositioned = false;
+
+        if (!containsMobAtPos(clonedMob.posX() + 1, clonedMob.posY()) &&
+            !nextStepOutsideRoom(clonedMob, +1, 0)) {
+            clonedMob.move(+1, 0);
+            return clonedMob;
+        }
+
+        if (!containsMobAtPos(clonedMob.posX(), clonedMob.posY() + 1) &&
+            !nextStepOutsideRoom(clonedMob, 0, +1)) {
+            clonedMob.move(0, +1);
+            return clonedMob;
+        }
+
+        if (!containsMobAtPos(clonedMob.posX() - 1, clonedMob.posY()) &&
+            !nextStepOutsideRoom(clonedMob, -1, 0)) {
+            clonedMob.move(-1, 0);
+            return clonedMob;
+        }
+
+        if (!containsMobAtPos(clonedMob.posX(), clonedMob.posY() - 1) &&
+            !nextStepOutsideRoom(clonedMob, 0, -1)) {
+            clonedMob.move(-1, 0);
+            return clonedMob;
+        }
+        return null;
     }
 }
