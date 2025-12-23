@@ -3,6 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents player's inventory.
+ */
 public class Inventory {
     private static Inventory instance;
     private List<Item> items;
@@ -15,6 +18,11 @@ public class Inventory {
         lastSelectedItemId = 0;
     }
 
+    /**
+     * Get an instance of Inventory.
+     *
+     * @return instance of Inventory
+     */
     public static Inventory getInventory() {
         if (instance == null) instance = new Inventory();
 
@@ -42,10 +50,11 @@ public class Inventory {
      * Select next item in the inventory.
      */
     public void selectNext() {
-        if (items.size() == 0)
+        if (items.size() == 0) {
             lastSelectedItemId = 0;
-        else
+        } else {
             lastSelectedItemId = (lastSelectedItemId + 1) % items.size();
+        }
     }
 
     /**

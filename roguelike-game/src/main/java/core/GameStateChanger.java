@@ -1,8 +1,10 @@
-package lib;
+package core;
 
 import core.GameState;
 import models.Player;
 import models.Inventory;
+import lib.Logger;
+import lib.Event;
 
 public class GameStateChanger {
     /**
@@ -59,7 +61,7 @@ public class GameStateChanger {
                 Logger.log("Exiting..");
                 System.exit(0);
             default:
-                Logger.log("WARN", "Unknow event: " + event.getType().toString());
+                Logger.log("WARN", "Unknown event: " + event.getType().toString());
         }
     }
 }

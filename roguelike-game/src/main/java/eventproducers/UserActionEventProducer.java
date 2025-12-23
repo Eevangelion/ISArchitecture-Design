@@ -5,10 +5,9 @@ import lib.Event;
 import java.awt.Toolkit;
 import java.awt.AWTEvent;
 import java.awt.event.AWTEventListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 
-class UserActionEventProducer extends EventProducer {
+public class UserActionEventProducer extends EventProducer {
     /**
     * This method is used to initialize an instance of this class.
     */

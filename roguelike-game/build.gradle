@@ -1,6 +1,18 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id "com.diffplug.spotless" version "6.11.0"
+}
+
+spotless {
+  enforceCheck false
+
+  java {
+    // importOrder()
+    removeUnusedImports()
+    formatAnnotations()
+    // googleJavaFormat()
+  }
 }
 
 repositories {
@@ -21,15 +33,15 @@ dependencies {
     implementation 'com.github.stefanbirkner:system-lambda:1.2.1'
 }
 
+application {
+    // Define the main class for the application.
+    mainClass = 'core.GameInitializer'
+}
+
 java {
   toolchain {
     languageVersion.set(JavaLanguageVersion.of(17))
   }
-}
-
-application {
-    // Define the main class for the application.
-    mainClass = 'core.GameInitializer'
 }
 
 test {

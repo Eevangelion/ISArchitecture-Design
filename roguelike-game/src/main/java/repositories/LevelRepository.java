@@ -4,12 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import core.Level;
-import core.Room;
-import models.Door;
-import models.Item;
-import models.GameObject;
-import models.Player;
+import models.*;
+
 
 public class LevelRepository extends Repository {
     private Level[] levels;
@@ -45,7 +41,8 @@ public class LevelRepository extends Repository {
                     (Boolean) room.get("visible"),
                     (Integer) room.get("x"),
                     (Integer) room.get("y"),
-                    buildGameObjects((ArrayList<LinkedHashMap>) room.get("objects"))
+                    buildGameObjects((ArrayList<LinkedHashMap>) room.get("objects")),
+                    (Integer) room.get("size")
                 );
             }
             targetLevels[levelIndex++] = new Level(
@@ -87,6 +84,15 @@ public class LevelRepository extends Repository {
                     (Integer) data.get("y"),
                     (String) data.get("name")
                 );
+            case "mob":
+                Mob mob = new Mob(
+                    (Integer) data.get("x"),
+                    (Integer) data.get("y"),
+                    (Integer) data.get("health"),
+                    (Integer) data.get("power")
+                );
+                mob.setMobBehavior((String) data.get("behavior"));
+                return mob;
             default:
                 throw new IllegalArgumentException();
         }
