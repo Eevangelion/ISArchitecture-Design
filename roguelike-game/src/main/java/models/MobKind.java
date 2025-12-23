@@ -1,3 +1,5 @@
 package models;
 
-public class MobKind {}
+public class MobKind {
+      
+}

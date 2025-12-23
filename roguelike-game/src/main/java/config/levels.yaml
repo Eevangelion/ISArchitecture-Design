@@ -3,7 +3,6 @@ levels:
       - visible: true
         x: 0
         y: 0
-        size: 10
         objects:
           - type: door
             x: 9
@@ -18,7 +17,6 @@ levels:
       - visible: false
         x: 30
         y: 10
-        size: 10
         objects:
           - type: door
             x: 39
@@ -30,18 +28,6 @@ levels:
             x: 37
             y: 13
             name: Sacrificial lamb
-          - type: mob
-            x: 38
-            y: 14
-            health: 200
-            power: 1
-            behavior: coward
-          - type: mob
-            x: 38
-            y: 13
-            health: 200
-            power: 1
-            behavior: aggressive
     player:
       x: 5
       y: 5
@@ -49,7 +35,6 @@ levels:
       - visible: true
         x: 30
         y: 0
-        size: 10
         objects:
           - type: door
             x: 35
@@ -64,7 +49,6 @@ levels:
       - visible: false
         x: 3
         y: 20
-        size: 10
         objects:
           - type: door
             x: 3

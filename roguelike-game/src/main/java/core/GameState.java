@@ -1,8 +1,7 @@
 package core;
 
-import models.Level;
-import models.Room;
 import models.Player;
+import repositories.LevelRepository;
 import lib.MapGenerator;
 
 public class GameState {
@@ -12,8 +11,9 @@ public class GameState {
     private int curLevelId = 0;
 
     public GameState() {
-        this.levels = MapGenerator.generate();
-        this.level = levels[0];
+        // this.levels = MapGenerator.generate(100, 48);
+        this.levels = new LevelRepository().getLevels();
+        this.level = this.levels[0];
     }
 
     /**

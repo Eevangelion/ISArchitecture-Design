@@ -1,8 +1,7 @@
-package models;
+package core;
 
-/**
- * This class represents level which is a container of all resources at the current game level.
- */
+import models.Player;
+
 public class Level {
     private Room[] rooms;
     private Player player;
@@ -38,15 +37,10 @@ public class Level {
     public void makeNextMove(Player player, int dx, int dy) {
         Room curRoom = rooms[currentRoomId];
 
-        CollisionsResolver colsResolver = new CollisionsResolver(currentRoomId);
-
-        curRoom.makeMove(player, dx, dy, colsResolver);
-
-        colsResolver.resolveCollisionsAndMovePlayer(player, curRoom);
-
-        if (currentRoomId != colsResolver.getCurrentRoom()) {
-            currentRoomId = colsResolver.getCurrentRoom();
-            rooms[currentRoomId].makeVisible();
+        int retValue = curRoom.makeMove(player, dx, dy);
+        if (retValue != -1) {
+            rooms[retValue].makeVisible();
+            currentRoomId = retValue;
         }
     }
 
@@ -59,11 +53,6 @@ public class Level {
         return rooms;
     }
 
-    /**
-     * Get player.
-     *
-     * @return Player
-     */
     public Player getPlayer() {
         return player;
     }
