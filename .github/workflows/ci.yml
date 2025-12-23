@@ -1,0 +1,25 @@
+name: CI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: gradle
+
+      - name: Move to project folder
+        run: cd roguelike-game
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Runt tests
+        run: ./gradlew test

@@ -1,11 +1,16 @@
 package ui;
 
 import core.GameState;
-import core.Room;
+import models.Room;
 import models.GameObject;
 import models.Inventory;
 import models.Item;
+import models.Door;
 import models.Player;
+import models.Mob;
+import models.Player;
+import models.ConfusedMob;
+import repositories.Configuration;
 
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -37,8 +42,8 @@ public class Renderer {
     public Renderer() {
         mapPosX = 0;
         mapPosY = 0;
-        mapWidth = 100;
-        mapHeight = 48;
+        mapWidth = (Integer) Configuration.get("screen.width");
+        mapHeight = (Integer) Configuration.get("screen.height");
         inventoryPosX = 100;
         inventoryPosY = 0;
         inventoryWidth = 30;
@@ -111,10 +116,15 @@ public class Renderer {
     private void drawGameObject(GameObject object) {
         if (!object.isVisible())
             return;
-        for (int i = 0; i < object.getRepresentation().length; ++i) {
-            for (int j = 0; j < object.getRepresentation()[0].length; ++j)
-                screen.setCharacter(object.posX() + i + mapPosX + 1, object.posY() + i + mapPosY + 1,
-                                    new TextCharacter(object.getRepresentation()[i][j]));
+
+        char[][] gameObjectRepresentation = getRepresentation(object);
+        for (int i = 0; i < gameObjectRepresentation.length; ++i) {
+            for (int j = 0; j < gameObjectRepresentation.length; ++j) {
+                screen.setCharacter(
+                    object.posX() + i + mapPosX + 1, object.posY() + i + mapPosY + 1,
+                    new TextCharacter(gameObjectRepresentation[i][j])
+                );
+            }
         }
     }
 
@@ -178,17 +188,28 @@ public class Renderer {
         int row = statPosY + 1;
 
         textGraphics.setForegroundColor(TextColor.ANSI.GREEN);
-        textGraphics.putString(column, row, "Health: " + Integer.toString(player.getHealth()));
+        // Empty tail is needed to refresh the specific position on a screen. For example when health gets from 100
+        // to 99 in order to erase last zero we need to explicitly place ' ' instead of it.
+        textGraphics.putString(column, row, "Health: " + Integer.toString(player.getHealth()) + "     ");
 
         textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.ANSI.CYAN);
-        textGraphics.putString(column, row + 1, "Attack: " + Integer.toString(player.getPower()));
+        textGraphics.putString(column, row + 1, "Attack: " + Integer.toString(player.getPower()) + "     ");
     }
 
     private void refreshScreenForNextLevel() {
         screen.clear();
         drawMapFrame();
         drawUtilitiesFrame();
+    }
+
+    private char[][] getRepresentation(GameObject gameObject) {
+        if (gameObject instanceof Door) return new char[][]{{'+'}};
+        else if (gameObject instanceof Item) return new char[][]{{'i'}};
+        else if (gameObject instanceof Player) return new char[][]{{'@'}};
+        else if (gameObject instanceof ConfusedMob) return new char[][]{{'c'}};
+        else if (gameObject instanceof Mob) return new char[][]{{'m'}};
+        else throw new IllegalArgumentException();
     }
 
     public void render(GameState gameState) {

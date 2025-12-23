@@ -1,7 +1,7 @@
 # Description
 Над проектом работают: Березикова Александра, Ботвиньева Екатерина, Платонов Иван. 
 
-Архитектурная документация находится в файле [roguelike-system-design-2hw.pdf](roguelike-system-design-2hw.pdf).
+Архитектурная документация находится в файле [roguelike-system-design.pdf](roguelike-system-design.pdf).
 
 Данный проект реализует простую терминальную rogue-like игру.
 
@@ -39,7 +39,7 @@ cd roguelike-game
 ```
 # Troubleshooting
 
-Если есть проблемы с запуском или компиляцией из-за несовместимости версий Java и Gradle, необходимо установить OpenJDK 11 и выполнить следующую команду:
+Если есть проблемы с запуском или компиляцией из-за несовместимости версий Java и Gradle, необходимо установить OpenJDK 17 и выполнить следующую команду:
 ```bash
 cd roguelike-game
 ./gradlew compileJava
